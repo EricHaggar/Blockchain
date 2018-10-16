@@ -5,10 +5,17 @@ import java.io.IOException;
 
 public class BlockChain {
 
-  private ArrayList blockChain;
+  private ArrayList<Block> blockChain;
 
+  public BlockChain() {
+
+    blockChain = new ArrayList<Block>();
+
+  }
 
   public static BlockChain fromFile(String fileName) {
+
+    BlockChain blocks = new BlockChain();
 
     try {
 
@@ -16,19 +23,44 @@ public class BlockChain {
       BufferedReader bufferedReader = new BufferedReader(fileReader);
 
       String line;
+      int index;
+      java.sql.Timestamp timestamp;
+      String sender;
+      String receiver;
+      int amount;
+      String nonce;
+      String previousHash;
+      String hash;
 
       while ((line = bufferedReader.readLine()) != null) {
 
-        System.out.println(line);
+        index = Integer.parseInt(line);
+        if (index == 0) {
+          previousHash = "00000";
+        } else {
+          previousHash = blocks.blockChain.get(index-1).getHash();
+        }
+        timestamp = new java.sql.Timestamp(Long.valueOf(bufferedReader.readLine()));
+        sender = bufferedReader.readLine();
+        receiver = bufferedReader.readLine();
+        amount = Integer.parseInt(bufferedReader.readLine());
+        nonce = bufferedReader.readLine();
+        hash = bufferedReader.readLine();
 
+        blocks.blockChain.add(new Block(index, timestamp, sender, receiver, amount, nonce, previousHash, hash));
       }
 
+      bufferedReader.close();
 
     } catch (IOException e) {
-      System.out.print("The file was not found");
+      System.out.print("Error while reading the file");
     }
 
-    return null;
+    for (int i = 0; i < blocks.blockChain.size(); i++) {
+			System.out.println(blocks.blockChain.get(i));
+		}
+
+    return blocks;
 
   }
 
@@ -40,8 +72,7 @@ public class BlockChain {
 
   public static void main(String[] args) {
 
-    System.out.println("COMPLETE MAIN METHOD!!");
-    fromFile("bitcoinBank.txt");
+    BlockChain blockchain = fromFile("bitcoinBank.txt");
 
 
   }

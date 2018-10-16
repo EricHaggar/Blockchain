@@ -21,13 +21,17 @@ public class TestSha1 {
     public static void main(String[] args) {
         try {
             // Test 1
-            String msg = "abc";
-            String expected = "a9993e36 4706816a ba3e2571 7850c26c 9cd0d89d";
+            long timestamp1 = Long.valueOf("1536150600000");
+            java.sql.Timestamp timetest1 = new java.sql.Timestamp(timestamp1);
+            String msg = timetest1.toString()+":satoshi:lucia=25.ZI4b]Cg+g2Tr`fn4EB00000613d1aec0be473e97e50e2a9e9f9f3fd73c";
+            String expected = "0000062b fc086a10 241b1574 18346447 10e82e0b";
             runTest(msg, expected, 1);
 
             // Test 2
-            msg = "test";
-            expected = "a94a8fe5 ccb19ba6 1c4c0873 d391e987 982fbbd3";
+            long timestamp2 = Long.valueOf("1231477200000");
+            java.sql.Timestamp timetest2 = new java.sql.Timestamp(timestamp2);
+            msg = timetest2.toString()+":bitcoin:satoshi=50.XNm.c@@*X\4Ff*=9GB200000";
+            expected = "00000613 d1aec0be 473e97e5 0e2a9e9f 9f3fd73c";
             runTest(msg, expected, 2);
 
             // Test 3
