@@ -17,7 +17,7 @@ public class BlockChain {
 
   public static BlockChain fromFile(String fileName) {
 
-    BlockChain blockChain = new BlockChain();
+    BlockChain blockchain = new BlockChain();
 
     try {
 
@@ -40,7 +40,7 @@ public class BlockChain {
         if (index == 0) {
           previousHash = "00000";
         } else {
-          previousHash = blockChain.blocks.get(index-1).getHash();
+          previousHash = blockchain.blocks.get(index-1).getHash();
         }
         timestamp = new java.sql.Timestamp(Long.valueOf(bufferedReader.readLine()));
         sender = bufferedReader.readLine();
@@ -49,7 +49,7 @@ public class BlockChain {
         nonce = bufferedReader.readLine();
         hash = bufferedReader.readLine();
 
-        blockChain.blocks.add(new Block(index, timestamp, sender, receiver, amount, nonce, previousHash, hash));
+        blockchain.blocks.add(new Block(index, timestamp, sender, receiver, amount, nonce, previousHash, hash));
       }
 
       bufferedReader.close();
@@ -62,7 +62,7 @@ public class BlockChain {
     System.out.println(blockChain.blocks.get(i));
   }*/
 
-  return blockChain;
+  return blockchain;
 
 }
 
@@ -97,9 +97,9 @@ public void toFile(String fileName) {
 
 public static void main(String[] args) {
 
-  BlockChain blockChain = fromFile("bitcoinBank.txt");
+  BlockChain blockchain = fromFile("bitcoinBank.txt");
 
-  blockChain.toFile("output.txt");
+  blockchain.toFile("output.txt");
 
 
 }
