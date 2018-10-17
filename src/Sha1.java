@@ -7,9 +7,9 @@ public class Sha1 {
 
     /**
      * Generates SHA-1 hash of string.
-     * 
+     *
      * Uses hash method with the OUT_HEX (no spaces) output format.
-     * 
+     *
      * @param msgIn String to be hashed.
      * @return Hash of msg as hex character string.
      * @throws UnsupportedEncodingException
@@ -122,7 +122,7 @@ public class Sha1 {
 
     /**
      * Returns the integer code of a char in a byte array.
-     * 
+     *
      * @param str   byte array of characters.
      * @param index position of the character desired.
      * @return integer code of such character.
@@ -140,7 +140,7 @@ public class Sha1 {
 
     /**
      * Converts a string into an array of bytes, using UTF-8 standard.
-     * 
+     *
      * @param str string to be converted
      * @return array of bytes
      * @throws UnsupportedEncodingException
@@ -156,27 +156,27 @@ public class Sha1 {
     public static int f(int s, int x, int y, int z) {
         int output;
         switch (s) {
-        // Ch()
-        case 0:
-            output = (x & y) ^ (~x & z);
-            break;
+            // Ch()
+            case 0:
+                output = (x & y) ^ (~x & z);
+                break;
 
-        // Parity()
-        case 1:
-            output = x ^ y ^ z;
-            break;
+            // Parity()
+            case 1:
+                output = x ^ y ^ z;
+                break;
 
-        // Maj()
-        case 2:
-            output = (x & y) ^ (x & z) ^ (y & z);
-            break;
+            // Maj()
+            case 2:
+                output = (x & y) ^ (x & z) ^ (y & z);
+                break;
 
-        // Parity()
-        case 3:
-            output = x ^ y ^ z;
-            break;
-        default:
-            throw (new RuntimeException("Unexpected case."));
+            // Parity()
+            case 3:
+                output = x ^ y ^ z;
+                break;
+            default:
+                throw (new RuntimeException("Unexpected case."));
         }
 
         return output;
@@ -184,7 +184,7 @@ public class Sha1 {
 
     /**
      * Rotates left (circular left shift) value x by n positions [§3.2.5].
-     * 
+     *
      * @param x value to rotate
      * @param n positions.
      * @return rotates int.
