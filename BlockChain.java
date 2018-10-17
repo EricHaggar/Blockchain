@@ -58,49 +58,49 @@ public class BlockChain {
       System.out.print("Error while reading the file!");
     }
 
- /*   for (int i = 0; i < blockChain.blocks.size(); i++) {
-			System.out.println(blockChain.blocks.get(i));
-		}*/
+    /*   for (int i = 0; i < blockChain.blocks.size(); i++) {
+    System.out.println(blockChain.blocks.get(i));
+  }*/
 
-    return blockChain;
+  return blockChain;
 
+}
+
+
+public void toFile(String fileName) {
+
+  try {
+
+    FileWriter fileReader = new FileWriter(fileName);
+    PrintWriter printWriter = new PrintWriter(fileReader);
+
+    for (int i = 0; i < blocks.size(); i++) {
+
+      printWriter.println(blocks.get(i).getIndex());
+      printWriter.println(blocks.get(i).getTimestamp().getTime());
+      printWriter.println(blocks.get(i).getTransaction().getSender());
+      printWriter.println(blocks.get(i).getTransaction().getReceiver());
+      printWriter.println(blocks.get(i).getTransaction().getAmount());
+      printWriter.println(blocks.get(i).getNonce());
+      printWriter.println(blocks.get(i).getPreviousHash());
+    }
+
+    printWriter.close();
+
+
+  } catch (IOException e) {
+
+    System.out.println("Error while writing to the file!");
   }
 
+}
 
-  public void toFile(String fileName) {
+public static void main(String[] args) {
 
-  	try {
+  BlockChain blockChain = fromFile("bitcoinBank.txt");
 
-  		FileWriter fileReader = new FileWriter(fileName);
-  		PrintWriter printWriter = new PrintWriter(fileReader);
-
-  		for (int i = 0; i < blocks.size(); i++) {
-
-  			printWriter.println(blocks.get(i).getIndex());
-  			printWriter.println(blocks.get(i).getTimestamp().getTime());
-  			printWriter.println(blocks.get(i).getTransaction().getSender());
-  			printWriter.println(blocks.get(i).getTransaction().getReceiver());
-  			printWriter.println(blocks.get(i).getTransaction().getAmount());
-  			printWriter.println(blocks.get(i).getNonce());
-  			printWriter.println(blocks.get(i).getPreviousHash());
-  		}
-
-  		printWriter.close();
+  blockChain.toFile("output.txt");
 
 
-  	} catch (IOException e) {
-
-  		System.out.println("Error while writing to the file!");
-  	}
-
-   }
-
-  public static void main(String[] args) {
-
-    BlockChain blockChain = fromFile("bitcoinBank.txt");
-
-    blockChain.toFile("output.txt");
-
-
-  }
+}
 }
