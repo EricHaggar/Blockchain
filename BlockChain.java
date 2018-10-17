@@ -2,20 +2,22 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class BlockChain {
 
-  private ArrayList<Block> blockChain;
+  private static ArrayList<Block> blocks;
 
   public BlockChain() {
 
-    blockChain = new ArrayList<Block>();
+    blocks = new ArrayList<Block>();
 
   }
 
   public static BlockChain fromFile(String fileName) {
 
-    BlockChain blocks = new BlockChain();
+    BlockChain blockChain = new BlockChain();
 
     try {
 
@@ -38,7 +40,7 @@ public class BlockChain {
         if (index == 0) {
           previousHash = "00000";
         } else {
-          previousHash = blocks.blockChain.get(index-1).getHash();
+          previousHash = blockChain.blocks.get(index-1).getHash();
         }
         timestamp = new java.sql.Timestamp(Long.valueOf(bufferedReader.readLine()));
         sender = bufferedReader.readLine();
@@ -47,32 +49,57 @@ public class BlockChain {
         nonce = bufferedReader.readLine();
         hash = bufferedReader.readLine();
 
-        blocks.blockChain.add(new Block(index, timestamp, sender, receiver, amount, nonce, previousHash, hash));
+        blockChain.blocks.add(new Block(index, timestamp, sender, receiver, amount, nonce, previousHash, hash));
       }
 
       bufferedReader.close();
 
     } catch (IOException e) {
-      System.out.print("Error while reading the file");
+      System.out.print("Error while reading the file!");
     }
 
-    for (int i = 0; i < blocks.blockChain.size(); i++) {
-			System.out.println(blocks.blockChain.get(i));
-		}
+ /*   for (int i = 0; i < blockChain.blocks.size(); i++) {
+			System.out.println(blockChain.blocks.get(i));
+		}*/
 
-    return blocks;
+    return blockChain;
 
   }
 
 
   public void toFile(String fileName) {
 
-    System.out.println("COMPLETE toFile METHOD!!");
-  }
+  	try {
+
+  		FileWriter fileReader = new FileWriter(fileName);
+  		PrintWriter printWriter = new PrintWriter(fileReader);
+
+  		for (int i = 0; i < blocks.size(); i++) {
+
+  			printWriter.println(blocks.get(i).getIndex());
+  			printWriter.println(blocks.get(i).getTimestamp().getTime());
+  			printWriter.println(blocks.get(i).getTransaction().getSender());
+  			printWriter.println(blocks.get(i).getTransaction().getReceiver());
+  			printWriter.println(blocks.get(i).getTransaction().getAmount());
+  			printWriter.println(blocks.get(i).getNonce());
+  			printWriter.println(blocks.get(i).getPreviousHash());
+  		}
+
+  		printWriter.close();
+
+
+  	} catch (IOException e) {
+
+  		System.out.println("Error while writing to the file!");
+  	}
+
+   }
 
   public static void main(String[] args) {
 
-    BlockChain blockchain = fromFile("bitcoinBank.txt");
+    BlockChain blockChain = fromFile("bitcoinBank.txt");
+
+    blockChain.toFile("output.txt");
 
 
   }

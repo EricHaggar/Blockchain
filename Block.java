@@ -26,6 +26,10 @@ public class Block {
     return timestamp;
   }
 
+  public Transaction getTransaction() {
+    return transaction;
+  }
+
   public String getNonce() {
     return nonce;
   }
