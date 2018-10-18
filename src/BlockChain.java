@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 
 public class BlockChain {
 
-    private static ArrayList<Block> blocks;
+    private ArrayList<Block> blocks;
 
     public BlockChain() {
 
@@ -58,10 +58,6 @@ public class BlockChain {
             System.out.print("Error while reading the file!");
         }
 
-       for (int i = 0; i < blockchain.blocks.size(); i++) {
-    System.out.println(blockchain.blocks.get(i));
-  }
-
         return blockchain;
 
     }
@@ -95,9 +91,30 @@ public class BlockChain {
 
     }
 
+    public boolean validateBlockchain() {
+
+        boolean valid = true;
+
+        for (int i = 0; i < blocks.size() - 1; i++) {
+
+            Block currentBlock = blocks.get(i);
+            Block nextBlock = blocks.get(i+1);
+
+            if (currentBlock.getIndex() != i) { //checks if indexes are consistent
+                return false;
+            }
+
+        }
+
+        return valid;
+
+    }
+
     public static void main(String[] args) {
 
         BlockChain blockchain = fromFile("bitcoinBank.txt");
+
+        blockchain.validateBlockchain();
 
         blockchain.toFile("output.txt");
 
