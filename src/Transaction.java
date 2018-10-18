@@ -25,9 +25,7 @@ public class Transaction {
     }
 
     public String toString() {
-
         return sender + ":" + receiver + "=" + amount;
-
     }
 
 }

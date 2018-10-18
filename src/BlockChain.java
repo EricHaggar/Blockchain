@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 public class BlockChain {
 
@@ -33,14 +34,16 @@ public class BlockChain {
             String nonce;
             String previousHash;
             String hash;
+            int numOfBlocks = 0;
 
             while ((line = bufferedReader.readLine()) != null) {
 
                 index = Integer.parseInt(line);
-                if (index == 0) {
+
+                if (numOfBlocks == 0) {
                     previousHash = "00000";
                 } else {
-                    previousHash = blockchain.blocks.get(index-1).getHash();
+                    previousHash = blockchain.blocks.get(numOfBlocks - 1).getHash();
                 }
                 timestamp = new java.sql.Timestamp(Long.valueOf(bufferedReader.readLine()));
                 sender = bufferedReader.readLine();
@@ -50,6 +53,7 @@ public class BlockChain {
                 hash = bufferedReader.readLine();
 
                 blockchain.blocks.add(new Block(index, timestamp, sender, receiver, amount, nonce, previousHash, hash));
+                numOfBlocks++;
             }
 
             bufferedReader.close();
@@ -88,25 +92,41 @@ public class BlockChain {
 
             System.out.println("Error while writing to the file!");
         }
-
     }
 
     public boolean validateBlockchain() {
 
-        boolean valid = true;
-
         for (int i = 0; i < blocks.size() - 1; i++) {
 
             Block currentBlock = blocks.get(i);
-            Block nextBlock = blocks.get(i+1);
+            Block nextBlock = blocks.get(i + 1);
 
-            if (currentBlock.getIndex() != i) { //checks if indexes are consistent
+            //checks if indexes are consistent
+            if ((currentBlock.getIndex() != i) || (nextBlock.getIndex() != i+1)) {
                 return false;
             }
 
+            try {
+
+                //calculates hash using Sha1 algorithm with attributes of the given block
+                String verifiedHash = Sha1.hash(currentBlock.toString(), Sha1.OUT_HEXW).replaceAll("\\s","");
+
+                //checks if calculated hash is the same as the hash in the block
+                if (!currentBlock.getHash().equals(verifiedHash)) {
+                    return false;
+                }
+
+            } catch (UnsupportedEncodingException e) {
+                System.out.println("EncodingError");
+            }
+
+            //checks if the current hash is the same as the previous hash of the next block
+            if (!currentBlock.getHash().equals(nextBlock.getPreviousHash())) {
+                return false;
+            }
         }
 
-        return valid;
+        return true;
 
     }
 

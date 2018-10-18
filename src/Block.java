@@ -15,7 +15,6 @@ public class Block {
         this.nonce = nonce;
         this.previousHash = previousHash;
         this.hash = hash;
-
     }
 
     public int getIndex() {
@@ -43,9 +42,7 @@ public class Block {
     }
 
     public String toString() {
-
         return timestamp.toString() + ":" + transaction.toString() + "." + nonce + previousHash;
-
     }
 
 }
