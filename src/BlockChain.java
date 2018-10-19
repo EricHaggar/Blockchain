@@ -197,7 +197,6 @@ public class BlockChain {
                 
                 userBalance -= validatedBlocks.get(i).getTransaction().getAmount();
             }
-            
         }
         
         return userBalance;
