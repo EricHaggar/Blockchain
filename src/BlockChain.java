@@ -193,7 +193,7 @@ public class BlockChain {
 
     }
 
-    //returns true if all failing criterias passed
+    //returns true if none of the failing criteria passed
     return true;
 
   }
