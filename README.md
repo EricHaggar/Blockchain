@@ -6,11 +6,11 @@ BlockChain is a simplified [blockchain](https://en.wikipedia.org/wiki/Blockchain
 ## Table of Contents
 
 
-  * [Getting Started](#gettingStarted)
-    * [Transactions File](#builtWith)
-    * [Prerequisites](#prerequisites)
-  * [Running The Simulation](#runSimulation)
-  * [Built With](#builtWith)
+- [Getting Started](#getting-started)
+  * [Transactions File](#transactions-file)
+  * [Prerequisites](#prerequisites)
+- [Running The Simulation](#running-the-simulation)
+- [Built With](#built-with)
 
 
 ## Getting Started 
