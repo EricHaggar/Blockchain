@@ -333,7 +333,7 @@ public class Blockchain {
 
     Scanner reader = new Scanner(System.in);
 
-    System.out.print("Please enter your username: ");
+    System.out.print("Please enter your miner ID (username): ");
     String username = reader.nextLine().replaceAll("\\s","");
     
     //asks the user to input a text file name containing a Blockchain
