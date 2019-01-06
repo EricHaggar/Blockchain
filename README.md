@@ -2,17 +2,6 @@
 
 BlockChain is a simplified [blockchain](https://en.wikipedia.org/wiki/Blockchain) simulation tool for bitcoin transactions.  BlockChain uses the **ArrayList** data structure to store one transaction in each block. In this tool, the 40 hex-character hash code is generated using the SHA-1 algorithm.
 
-
-## Table of Contents
-
-
-- [Getting Started](#getting-started)
-  * [Transactions File](#transactions-file)
-  * [Prerequisites](#prerequisites)
-- [Running The Simulation](#running-the-simulation)
-- [Built With](#built-with)
-
-
 ## Getting Started 
 
 Clone the repository with:
