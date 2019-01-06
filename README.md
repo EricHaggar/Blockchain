@@ -6,13 +6,13 @@ BlockChain is a simplified [blockchain](https://en.wikipedia.org/wiki/Blockchain
 
 Clone the repository with:
 
-```bash
+```
 git clone https://github.com/EricHaggar/BlockChain.git
 ```
 
 Change your directory to the project
 
-```bash
+```
 cd BlockChain
 ```
 
@@ -32,7 +32,7 @@ hash
 
 The transaction file given can be used or a new one can be created.
 
-**Please note:** "bitcoin" needs to be the first sender in the transaction and cannot be used in any other transactions. Also, the hash code for each transaction uses the following format:
+**Please Note:** "bitcoin" needs to be the first sender in the transaction and cannot be used in any other transactions. Also, the hash code for each transaction uses the following format:
 
 ```
 timestamp.toString() + ":" + transaction.toString() + "." + nonce + previousHash
