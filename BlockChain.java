@@ -405,6 +405,7 @@ public class BlockChain {
       System.out.println("The entered file name does not exist!");
     }
 
+    reader.close();
 
   }
 
