@@ -322,11 +322,22 @@ public class BlockChain {
   */
   public static void main(String[] args) {
 
+    System.out.println();
+    System.out.println("************************************************************");
+    System.out.println("*           Welcome to the Blockchain simulator            *");
+    System.out.println("*               Developped by: Eric Haggar                 *");
+    System.out.println("************************************************************");
+    System.out.println();
+
+
 
     Scanner reader = new Scanner(System.in);
 
+    System.out.print("Please enter your username: ");
+    String username = reader.nextLine().replaceAll("\\s","");
+    
     //asks the user to input a text file name containing a blockchain
-    System.out.print("Welcome to the blockchain simulator, please enter the name of the blockchain file you'd like to validate without the .txt extension (ex: blockchain): ");
+    System.out.print("Hi " + username + ", please enter the name of the blockchain file you'd like to validate without the .txt extension (ex: blockchain): ");
     String fileName = reader.nextLine().replaceAll("\\s","");
 
     //checks if the file exists in the path
@@ -377,7 +388,7 @@ public class BlockChain {
               break;
             }
           } else { //if the user enters anything but yes, the blockchain is printed to a text file
-            blockchain.toFile(fileName+"_ehagg014.txt");
+            blockchain.toFile(fileName+"_" + username + ".txt");
             break;
           }
 
