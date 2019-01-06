@@ -11,15 +11,15 @@ import java.sql.Timestamp;
 import java.lang.System;
 import java.io.File;
 
-public class BlockChain {
+public class Blockchain {
 
-  //defining the blockchain that will store the blocks
+  //defining the Blockchain that will store the blocks
   private ArrayList<Block> blocks;
 
   /*
-  initializing the blockchain arraylist
+  initializing the Blockchain arraylist
   */
-  public BlockChain() {
+  public Blockchain() {
     blocks = new ArrayList<Block>();
   }
 
@@ -27,12 +27,12 @@ public class BlockChain {
   this method reads the contents of the text file fileName and
   creates blocks from the information stored in the text file
 
-  returns an instance BlockChain containing the blocks
+  returns an instance Blockchain containing the blocks
   */
-  public static BlockChain fromFile(String fileName) {
+  public static Blockchain fromFile(String fileName) {
 
-    //creates an instance of BlockChain
-    BlockChain blockchain = new BlockChain();
+    //creates an instance of Blockchain
+    Blockchain blockchain = new Blockchain();
 
 
     //using FileReader and BufferedReader, information is stored in blocks
@@ -63,7 +63,7 @@ public class BlockChain {
         if (numOfBlocks == 0) {
           previousHash = "00000";
           //if any other block is being initialized, the previousHash will be taken
-          //from the last block added to the blockchain
+          //from the last block added to the Blockchain
         } else {
           previousHash = blockchain.blocks.get(numOfBlocks - 1).getHash();
         }
@@ -90,13 +90,13 @@ public class BlockChain {
   }
 
   /*
-  this method outputs the contents of the blockchain and stores
+  this method outputs the contents of the Blockchain and stores
   the blocks in the fileName.txt text file.
   */
   public void toFile(String fileName) {
 
     //using FileWriter and PrintWriter, the information from the blocks
-    //in the blockchain can be printed to the text file
+    //in the Blockchain can be printed to the text file
 
     try {
 
@@ -123,17 +123,17 @@ public class BlockChain {
   }
 
   /*
-  this method validates the blockchain given in a text file.
+  this method validates the Blockchain given in a text file.
 
-  returns true if the blockchain is valid, and false otherwise.
+  returns true if the Blockchain is valid, and false otherwise.
   */
   public boolean validateBlockchain() {
 
-    //This will allow to keep track of the miners in the blockchain and
+    //This will allow to keep track of the miners in the Blockchain and
     //to get their balance
     ArrayList<String> miners = new ArrayList<String>();
 
-    //looping through all blocks in the blockchain
+    //looping through all blocks in the Blockchain
     for (int i = 0; i < blocks.size(); i++) {
 
       //checks if indexes are consistent
@@ -182,7 +182,7 @@ public class BlockChain {
       }
 
 
-      //This will check the balances of the miners in the blockchain
+      //This will check the balances of the miners in the Blockchain
       //Does not take in consideration the first miner since it's bitcoin
       for (int j = 1; j < miners.size(); j++) {
 
@@ -226,12 +226,12 @@ public class BlockChain {
   }
 
   /*
-  This method adds block to the blockchain
+  This method adds block to the Blockchain
   */
   public void add(Block block) {
 
     //generates a nonce for this block before adding
-    //it to the blockchain
+    //it to the Blockchain
     generateNonce(block);
     blocks.add(block);
 
@@ -318,7 +318,7 @@ public class BlockChain {
   }
 
   /*
-  Main method of the blockchain
+  Main method of the Blockchain
   */
   public static void main(String[] args) {
 
@@ -336,21 +336,21 @@ public class BlockChain {
     System.out.print("Please enter your username: ");
     String username = reader.nextLine().replaceAll("\\s","");
     
-    //asks the user to input a text file name containing a blockchain
-    System.out.print("Hi " + username + ", please enter the name of the blockchain file you'd like to validate without the .txt extension (ex: blockchain): ");
+    //asks the user to input a text file name containing a Blockchain
+    System.out.print("Hi " + username + ", please enter the name of the Blockchain file you'd like to validate without the .txt extension (ex: bitcoinBank): ");
     String fileName = reader.nextLine().replaceAll("\\s","");
 
     //checks if the file exists in the path
-    BlockChain blockchain = fromFile(fileName+".txt");
+    Blockchain blockchain = fromFile(fileName+".txt");
     File temp = new File(fileName+".txt");
     boolean exists = temp.exists();
 
     if (exists) {
 
-      //if the blockchain read from the file is valid, will proceed
+      //if the Blockchain read from the file is valid, will proceed
       if(blockchain.validateBlockchain()) {
 
-        System.out.println("The entered blockchain is Valid!");
+        System.out.println("The entered Blockchain is Valid!");
 
         while(true) {
 
@@ -381,28 +381,28 @@ public class BlockChain {
               String previousHash = blockchain.blocks.get(blockchain.blocks.size()-1).getHash();
               //uses second constructor of Block class
               Block block = new Block (index, timestamp, transaction, previousHash);
-              //generates nonce and adds block to the blockchain
+              //generates nonce and adds block to the Blockchain
               blockchain.add(block);
             } else { //if sender does not have enough bitcoins, the transaction is invalid and program is terminated
               System.out.println("Invalid Transaction!");
               break;
             }
-          } else { //if the user enters anything but yes, the blockchain is printed to a text file
+          } else { //if the user enters anything but yes, the Blockchain is printed to a text file
             blockchain.toFile(fileName+"_" + username + ".txt");
             break;
           }
 
         }
 
-      } else { //if the blockchain does not pass validation, the program terminates
+      } else { //if the Blockchain does not pass validation, the program terminates
 
-        System.out.println("The entered blockchain is Invalid!");
+        System.out.println("The entered Blockchain is Invalid!");
 
       }
 
     } else { //if the file entered does not exist, the program terminates
 
-      System.out.println("The entered file name does not exist!");
+      System.out.println(" The entered file name does not exist!");
     }
 
     reader.close();
