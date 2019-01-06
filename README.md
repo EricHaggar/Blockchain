@@ -1,19 +1,19 @@
 # Blockchain
 
-Blockchain is a simplified [blockchain](https://en.wikipedia.org/wiki/Blockchain) simulation tool for bitcoin transactions.  BlockChain uses the **ArrayList** data structure to store one transaction in each block. In this tool, the 40 hex-character hash code is generated using the SHA-1 algorithm.
+Blockchain is a simplified [blockchain](https://en.wikipedia.org/wiki/Blockchain) simulation tool for bitcoin transactions.  Blockchain uses the **ArrayList** data structure to store one transaction in each block. In this tool, the 40 hex-character hash code is generated using the SHA-1 algorithm.
 
 ## Getting Started 
 
 Clone the repository with:
 
 ```
-git clone https://github.com/EricHaggar/BlockChain.git
+git clone https://github.com/EricHaggar/Blockchain.git
 ```
 
 Change your directory to the project
 
 ```
-cd BlockChain
+cd Blockchain
 ```
 
 ### Transactions File
@@ -57,7 +57,7 @@ javac *.java
 Run the tool 
 
 ```
-java BlockChain
+java Blockchain
 ```
 
 ## Built With
